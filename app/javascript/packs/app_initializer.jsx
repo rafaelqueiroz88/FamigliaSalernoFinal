@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import  'bootstrap/dist/css/bootstrap.min.css'
 
 import App from '../components/App'
-import NavigationBar from '../components/Layout/NavigationBar'
+
+console.log('oi')
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Router>
-      <NavigationBar />
       <Route path="/" component={App}/>
     </Router>,
     document.body.appendChild(document.createElement('div')),

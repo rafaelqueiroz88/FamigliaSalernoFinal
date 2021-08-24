@@ -7,6 +7,8 @@ import PizzaCard from './Pizzas/PizzaCard'
 
 const Pizzas = () => {
 
+    console.log('Cheguei até as pizzas')
+
     let history = useHistory()
 
     const user_token = localStorage.getItem('token') != null ? localStorage.getItem('token') : null
