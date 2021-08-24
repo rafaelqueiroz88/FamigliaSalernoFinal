@@ -1,3 +1,10 @@
+# CONFIG FOR HEROKU (erase or comment all the other configs if so)
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   host: <%= ENV['DATABASE_URL'] %>
+
 default: &default
   adapter: postgresql
   encoding: unicode

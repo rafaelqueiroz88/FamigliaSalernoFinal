@@ -24,7 +24,13 @@ module Api
                 if @user.valid?
                     if @user.save
                         token = encode_token({ user_id: @user.id })
-                        render json: { user: @user, token: token }, status: 200
+                        render json: { 
+                            name: @user.name, 
+                            email: @user.email,
+                            slug: @user.slug,
+                            user_type: @user.user_type,
+                            token: token 
+                        }, status: 200
                     else
                         render json: { error: @user.error.messages }, status: 422
                     end
@@ -36,20 +42,28 @@ module Api
             # @patch: /api/v1/users/:slug
             def update
                 user = User.find_by(slug: params[:slug])
-                if user.update(user_params)
-                    render json: UserSerializer.new(user).serialized_json
+                if user.slug == params[:slug]
+                    if user.update(user_params)
+                        render json: UserSerializer.new(user).serialized_json
+                    else
+                        render json: { error: user.error.message }, status: 422
+                    end
                 else
-                    render json: { error: user.error.message }, status: 422
+                    render json: { error: "This user doesn't have permission to update this user" }
                 end
             end
 
             # @delete: /api/v1/users/:slug
             def destroy
                 user = User.find_by(slug: params[:slug])
-                if user.delete
-                    head :no_content
+                if user.slug == params[:slug]
+                    if user.delete
+                        head :no_content
+                    else
+                        render json: { error: user.error.message }, status: 422
+                    end
                 else
-                    render json: { error: user.error.message }, status: 422
+                    render json: { error: "This user doesn't have permission to delete this user" }
                 end
             end
 
@@ -59,7 +73,13 @@ module Api
                 @user = User.find_by(email: params[:email])
                 if @user && @user.authenticate(params[:password])
                     token = encode_token({ user_id: @user.id })
-                    render json: { user: @user, token: token }, status: 200
+                    render json: { 
+                        name: @user.name, 
+                        email: @user.email,
+                        slug: @user.slug,
+                        user_type: @user.user_type,
+                        token: token 
+                    }, status: 200
                 else
                     render json: { error: "Endereço de e-mail E/OU senha inválidos" }, status: 208
                 end
@@ -69,6 +89,7 @@ module Api
             def auto_login
                 render json: @user
             end
+
 
             private
 

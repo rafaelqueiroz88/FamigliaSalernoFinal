@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_160907) do
+ActiveRecord::Schema.define(version: 2021_08_22_200120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,25 @@ ActiveRecord::Schema.define(version: 2021_08_18_160907) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "pizzas"
+    t.bigint "address_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "pizzas", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.string "description"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -37,8 +56,10 @@ ActiveRecord::Schema.define(version: 2021_08_18_160907) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
-    t.integer "type"
+    t.integer "user_type"
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "orders", "addresses"
+  add_foreign_key "orders", "users"
 end

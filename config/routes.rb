@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       resources :users, params: :slug
       resources :addresses, params: :slug
+      resources :pizzas, params: :slug
 
       # custom routes for auth
       post "/login", to: "users#login"
