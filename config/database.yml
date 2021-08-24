@@ -1,24 +1,31 @@
+# CONFIG FOR HEROKU (erase or comment all the other configs if so)
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: db
-  user: postgres
-  password: nopass
-  port: 5432
+  host: <%= ENV['DATABASE_URL'] %>
 
-development:
-  <<: *default
-  database: FamigliaSalerno_development
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   # For details on connection pooling, see Rails configuration guide
+#   # https://guides.rubyonrails.org/configuring.html#database-pooling
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   host: db
+#   user: postgres
+#   password: nopass
+#   port: 5432
 
-test:
-  <<: *default
-  database: FamigliaSalerno_test
+# development:
+#   <<: *default
+#   database: FamigliaSalerno_development
 
-production:
-  <<: *default
-  database: <%= ENV['DATABASE_URL'] %>
-  # username: FamigliaSalerno
-  # password: <%= ENV['FAMIGLIASALERNO_DATABASE_PASSWORD'] %>
+# test:
+#   <<: *default
+#   database: FamigliaSalerno_test
+
+# production:
+#   <<: *default
+#   database: FamigliaSalerno_production
+#   username: FamigliaSalerno
+#   password: <%= ENV['FAMIGLIASALERNO_DATABASE_PASSWORD'] %>
