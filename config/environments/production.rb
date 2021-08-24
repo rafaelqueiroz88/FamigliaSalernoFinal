@@ -97,9 +97,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # https://stackoverflow.com/questions/47377494/webpack-error-on-heroku-deployment
-  config.public_file_server.enabled = true # ENV['RAILS_SERVE_STATIC_FILES'].present?
-
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
