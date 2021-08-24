@@ -1,1 +1,0 @@
-web:node app/javascript/packs/app_initializer.jsx
