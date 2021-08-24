@@ -4,7 +4,7 @@ module Api
 
             protect_from_forgery with: :null_session
 
-            before_action :authorized, except: [:index, :show]
+            # before_action :authorized, except: [:index, :show]
 
             # @get: /api/v1/pizzas.json
             def index
