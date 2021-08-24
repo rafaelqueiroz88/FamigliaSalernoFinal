@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
     before_create :set_basics
 
+    validates :name, :email, :password, :presence => true
+    validates :email, :uniqueness => true
+
     def set_basics
         puzzle = rand(11111...99999)
         self.slug = "#{name.parameterize}-#{puzzle}"

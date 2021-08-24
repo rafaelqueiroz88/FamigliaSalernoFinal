@@ -49,7 +49,7 @@ module Api
                         render json: { error: user.error.message }, status: 422
                     end
                 else
-                    render json: { error: "This user doesn't have permission to update this user" }
+                    render json: { error: "This user doesn't have permission to update this user" }, status: 208
                 end
             end
 
@@ -63,11 +63,10 @@ module Api
                         render json: { error: user.error.message }, status: 422
                     end
                 else
-                    render json: { error: "This user doesn't have permission to delete this user" }
+                    render json: { error: "This user doesn't have permission to delete this user" }, status: 208
                 end
             end
 
-            # TODO: make auth routes and setup
             # @post: /api/v1/login
             def login
                 @user = User.find_by(email: params[:email])
