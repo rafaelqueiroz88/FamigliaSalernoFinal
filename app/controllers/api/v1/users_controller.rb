@@ -47,7 +47,7 @@ module Api
                     if user.update(user_params)
                         render json: UserSerializer.new(user).serialized_json
                     else
-                        render json: { error: user.error.message }, status: 422
+                        render json: { error: user.errors.message }, status: 422
                     end
                 else
                     render json: { error: "This user doesn't have permission to update this user" }, status: 208
