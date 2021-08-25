@@ -41,7 +41,7 @@ const Pizzas = () => {
             })
     }, [])
 
-    const menu = user_token != null 
+    const menu = user_type != 0 
         ? <Row><Col><Button href="/pizzas/nova"><i className="fas fa-plus-circle"></i> Nova Pizza</Button></Col></Row> 
         : ''
 
