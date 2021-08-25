@@ -12,8 +12,6 @@ import PizzaAttachment from './Pizzas/PizzaAttachment'
 
 const App = () => {
 
-    console.log('Cheguei aqui')
-
     return(
         <Fragment>
             <NavigationBar />

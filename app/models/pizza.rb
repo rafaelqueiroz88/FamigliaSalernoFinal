@@ -1,5 +1,7 @@
 class Pizza < ApplicationRecord
 
+    include ImageUploader::Attachment(:photo)
+
     before_create :slugify
 
     def slugify

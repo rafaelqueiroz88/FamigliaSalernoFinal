@@ -48,11 +48,21 @@ module Api
                 end
             end
 
+            # @patch: /pizza/attachment/:slug
+            def attachment
+                pizza = Pizza.find_by(slug: params[:slug])
+                if pizza.update(pizza_params)
+                    render json: PizzaSerializer.new(pizza).serialized_json
+                else
+                    render json: { error: pizza.errors.message }, status: 422
+                end
+            end
+
 
             private
 
             def pizza_params
-                params.require(:pizza).permit(:name, :value, :description)
+                params.require(:pizza).permit(:name, :value, :description, :photo)
             end
         end
     end

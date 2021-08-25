@@ -14,6 +14,7 @@ RUN gem install bundler
 RUN gem install pg
 RUN gem install sidekiq
 RUN gem install redis
+RUN gem install firebase
 
 RUN mkdir /app
 WORKDIR /app

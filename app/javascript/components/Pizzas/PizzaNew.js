@@ -38,7 +38,7 @@ const PizzaNew = () => {
 
         axios.post('/api/v1/pizzas.json', pizza, config)
             .then(response => {
-                history.push(`/pizza/anexo/${response.data.data.attributes.slug}`)
+                history.push(`/pizzas/anexo/${response.data.data.attributes.slug}`)
             })
             .catch(response => {
                 console.log(response)

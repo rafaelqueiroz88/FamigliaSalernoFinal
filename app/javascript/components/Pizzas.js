@@ -7,8 +7,6 @@ import PizzaCard from './Pizzas/PizzaCard'
 
 const Pizzas = () => {
 
-    console.log('Cheguei até as pizzas')
-
     let history = useHistory()
 
     const user_token = localStorage.getItem('token') != null ? localStorage.getItem('token') : null
@@ -29,7 +27,7 @@ const Pizzas = () => {
             headers: { Authorization: `Bearer ${user_token}`}
         }
 
-    const [pizzas, setPizzas] = useState([])
+    const [pizzas, setPizzas] = useState(null)
 
     useEffect(() => {
         axios.get('/api/v1/pizzas.json')
@@ -45,15 +43,19 @@ const Pizzas = () => {
         ? <Row><Col><Button href="/pizzas/nova"><i className="fas fa-plus-circle"></i> Nova Pizza</Button></Col></Row> 
         : ''
 
-    const cards = pizzas.map( pizza => {
+    let cards = null
+    
+    if(pizzas != null) {
+        cards = pizzas.map( pizza => {
 
-        return(
-            <PizzaCard
-                key={ pizza.id }
-                attributes={ pizza.attributes }
-            />
-        )
-    })
+            return(
+                <PizzaCard
+                    key={ pizza.id }
+                    attributes={ pizza.attributes }
+                />
+            )
+        })
+    }
 
     return(
         <Container>
@@ -65,7 +67,7 @@ const Pizzas = () => {
             { menu }
             <Row className="pt-3 pl-2">
                 <Col>
-                    { pizzas.count == undefined ? 'Nenhuma Pizza cadastrada até o momento' : cards }
+                    { cards == null ? 'Nenhuma Pizza cadastrada até o momento' : cards }
                 </Col>                
             </Row>            
         </Container>

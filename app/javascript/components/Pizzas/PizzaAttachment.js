@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import styled from 'styled-components'
 
-const PizzaNew = (props) => {
+const Img = styled.img`
+    width: 80%;
+    max-height: 250px;
+    box-shadow: 4px 4px 4px rgba(30, 30, 30, 0.6);
+    border-radius: 50%;
+`
+
+const PizzaAttachment = (props) => {
 
     let history = useHistory()
 
@@ -21,23 +29,48 @@ const PizzaNew = (props) => {
         }
 
     const [pizza, setPizza] = useState([])
+    const form = new FormData()
 
-    const handleChange = (e) => {
+    const uri = props.match.params.slug
+
+    if(uri != undefined) {
+        useEffect(() => {
+            axios.get(`/api/v1/pizzas/${uri}`)
+                .then(response => {
+                    setPizza(response.data.data.attributes)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }, [])
+    }
+
+    let image_id = null
+
+    if(pizza.picture_data != undefined || pizza.picture_data != null) {
+        image_id = JSON.parse(pizza.picture_data)
+    }
+
+    const fileHandler = (e) => {
         e.preventDefault()
-        setPizza(Object.assign({}, pizza, { [e.target.name]: e.target.value }))
+        form.append(`pizza[${e.target.name}]`, e.target.files[0])
     }
 
     const handleFormSubmit = (e) => {
-
         e.preventDefault()
 
+        /**
+         * Get Token (csrf) for requests
+         */
         const csrfToken = document.querySelector('[name=csrf-token]').content
         axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
 
-        axios.patch('/api/v1/pizzas.json', pizza, config)
+        const url = `/api/v1/pizza/attachment/${uri}`
+
+        axios.patch(url, form, config)
             .then(response => {
-                console.log('Pizza cadastrada com sucesso!')
-                history.push('/pizza/anexo')
+                alert('Imagem anexada com sucesso para: ' + response.data.data.attributes.name)
+                history.push("/pizzas")
             })
             .catch(response => {
                 console.log(response)
@@ -48,39 +81,34 @@ const PizzaNew = (props) => {
         <Container>
             <Row className="pt-5 pb-3">
                 <Col>
-                    <h2>Nova Pizza</h2>
+                    <h2>Anexe uma Imagem</h2>
                 </Col>
             </Row>
 
-            <Form onSubmit={handleFormSubmit}>
-                <Form.Group as={Row} className="mb-3" controlId="pizzaName">
-                    <Form.Label column sm="2">
-                        Nome
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control name="name" onChange={handleChange} placeholder="Baurú..." />
-                    </Col>
-                </Form.Group>
+            <Form onSubmit={handleFormSubmit} encType={"multipart/form-data"}>
 
-                <Form.Group as={Row} className="mb-3" controlId="pizzaDescription">
-                    <Form.Label column sm="2">
-                        Descrição
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control name="description" onChange={handleChange} placeholder="Descreva de forma direta alguns ingredientes..." />
+                <Row>
+                    <Col xs={10} sm={10} md={3}>
+                        <div className={"form-group"}>
+                            { 
+                                image_id != null ? 
+                                <Img src={`/uploads/${ image_id.id }`} alt={`${pizza.name}`} /> : 
+                                ''
+                            }
+                        </div>
                     </Col>
-                </Form.Group>
+                </Row>
 
                 <Form.Group as={Row} className="mb-3" controlId="pizzaValue">
                     <Form.Label column sm="2">
                         Preço R$
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="number" onChange={handleChange} name="value" placeholder="30,00" />
+                        <Form.Control onChange={fileHandler} type={"file"} accept={"image/*"} name="photo" />
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3 pt-3" controlId="pizzaValue">
+                <Form.Group as={Row} className="mb-3 pt-3" controlId="pizzaButton">
                     <Col xs={{ span: 6, offset: 3 }} sm={{ span: 6, offset: 3 }}>
                         <div className="d-grid gap-2">
                             <Button type="submit" size="lg">
@@ -94,4 +122,4 @@ const PizzaNew = (props) => {
     )
 }
 
-export default PizzaNew
+export default PizzaAttachment

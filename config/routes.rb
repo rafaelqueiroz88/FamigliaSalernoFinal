@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :users, params: :slug
-      resources :addresses, params: :slug
-      resources :pizzas, params: :slug
+      resources :users, param: :slug
+      resources :addresses, param: :slug
+      resources :pizzas, param: :slug
+
+      # custom routes for file uploads
+      match "/pizza/attachment/:slug", to: "pizzas#attachment", via: :patch
 
       # custom routes for auth
       post "/login", to: "users#login"
