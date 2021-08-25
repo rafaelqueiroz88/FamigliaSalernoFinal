@@ -6,12 +6,10 @@ import  'bootstrap/dist/css/bootstrap.min.css'
 
 import App from '../components/App'
 
-console.log('oi')
-
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Router>
-      <Route path="/" component={App}/>
+      <Route path="/" component={App} />
     </Router>,
     document.body.appendChild(document.createElement('div')),
   )
