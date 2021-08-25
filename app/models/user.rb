@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
     before_create :set_basics
 
-    validates :name, :email, :password, :presence => true
+    validates :name, :email, :password, :presence => true, on: :create
     validates :email, :uniqueness => true
 
     def set_basics
