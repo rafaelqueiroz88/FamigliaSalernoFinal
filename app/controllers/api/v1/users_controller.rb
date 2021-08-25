@@ -42,6 +42,7 @@ module Api
             # @patch: /api/v1/users/:slug
             def update
                 user = User.find_by(slug: params[:slug])
+                puts user.inspect
                 if user.slug == params[:slug]
                     if user.update(user_params)
                         render json: UserSerializer.new(user).serialized_json
