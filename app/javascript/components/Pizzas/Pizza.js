@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { StyleSheet, css } from 'aphrodite'
 
 import './pizza.css'
 
@@ -18,6 +19,7 @@ const Img = styled.img`
     @media screen and (min-width: 1260px) {
         width: 65%;
         max-height: 230px;
+        min-height: 230px;
         position: relative;
             top: 115px;
     }
@@ -25,6 +27,14 @@ const Img = styled.img`
     box-shadow: 4px 4px 4px rgba(30, 30, 30, 0.6);
     border-radius: 50%;
 `
+
+const picPosition = StyleSheet.create ({
+    cover: {
+        '@media screen and (max-width: 360px)': {
+            marginTop: '10px'
+        }
+    }  
+})
 
 const Pizza = (props) => {
 
@@ -83,13 +93,13 @@ const Pizza = (props) => {
 
     return(
         <Container>
-            <Row className="cover">
-                <Col xs={{ span: 10, offset: 2 }} sm={{ span: 10, offset: 2 }} md={{ span: 4, offset: 1}}>
+            <Row >
+                <Col xs={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} md={{ span: 4, offset: 1}}>
                     { image_id != null ? <Img src={`/uploads/${image_id.id}`} alt={pizza.name} /> : '' }
                 </Col>
             </Row>
             <Row className="pt-5">
-                <Col className="pt-5 pic-spacing" xs={{ span: 10, offset: 2 }} sm={{ span: 10, offset: 2 }} md={{ span: 4, offset: 4 }}>
+                <Col className="pt-5 pic-spacing" xs={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} md={{ span: 4, offset: 4 }}>
                     <h3>{ pizza.name }</h3>
                 </Col>
             </Row>

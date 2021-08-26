@@ -1,7 +1,12 @@
 import React from 'react'
-import { Col, Card, Button } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 
 import './pizza.css'
+
+const shaddow = {
+    boxShadow: '12px 12px 12px rgba(30, 30, 30, .8)',
+    width: '18rem'
+}
 
 const PizzaCard = (props) => {
 
@@ -12,7 +17,7 @@ const PizzaCard = (props) => {
     }
 
     return(
-        <Card className="shaddow mb-3 mr-3" style={{ width: '18rem' }}>
+        <Card className="mb-3 mr-3" style={ shaddow }>
             {
                 props.attributes.photo_data ?
                 <Card.Img variant="top" src={`/uploads/${image_id.id}`} /> :
