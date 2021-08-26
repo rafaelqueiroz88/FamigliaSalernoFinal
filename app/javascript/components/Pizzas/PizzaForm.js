@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 
-// import PizzaCard from './Pizzas/PizzaCard'
-
-const PizzaNew = () => {
+const PizzaForm = (props) => {
 
     let history = useHistory()
 
@@ -24,6 +22,21 @@ const PizzaNew = () => {
 
     const [pizza, setPizza] = useState([])
 
+    const uri = props.match.params.slug
+    const url = `/api/v1/pizzas/${uri}`
+
+    if(uri != undefined) {
+        useEffect(() => {
+            axios.get(url)
+                .then(response => {
+                    setPizza(response.data.data.attributes)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }, [])
+    }    
+
     const handleChange = (e) => {
         e.preventDefault()
         setPizza(Object.assign({}, pizza, { [e.target.name]: e.target.value }))
@@ -36,13 +49,24 @@ const PizzaNew = () => {
         const csrfToken = document.querySelector('[name=csrf-token]').content
         axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
 
-        axios.post('/api/v1/pizzas.json', pizza, config)
+        if(uri != undefined) {
+            axios.patch(`/api/v1/pizzas/${uri}`, pizza, config)
             .then(response => {
                 history.push(`/pizzas/anexo/${response.data.data.attributes.slug}`)
             })
             .catch(response => {
                 console.log(response)
             })
+        }
+        else {
+            axios.post('/api/v1/pizzas.json', pizza, config)
+            .then(response => {
+                history.push(`/pizzas/anexo/${response.data.data.attributes.slug}`)
+            })
+            .catch(response => {
+                console.log(response)
+            })
+        }
     }
 
     return(
@@ -54,12 +78,13 @@ const PizzaNew = () => {
             </Row>
 
             <Form onSubmit={handleFormSubmit}>
+
                 <Form.Group as={Row} className="mb-3" controlId="pizzaName">
                     <Form.Label column sm="2">
                         Nome
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control name="name" onChange={handleChange} placeholder="Baurú..." />
+                        <Form.Control name="name" onChange={handleChange} value={pizza.name != undefined ? pizza.name : ''} placeholder="Baurú..." />
                     </Col>
                 </Form.Group>
 
@@ -68,7 +93,7 @@ const PizzaNew = () => {
                         Descrição
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control name="description" onChange={handleChange} placeholder="Descreva de forma direta alguns ingredientes..." />
+                        <Form.Control name="description" onChange={handleChange} value={pizza.description != undefined ? pizza.description : ''} placeholder="Descreva de forma direta alguns ingredientes..." />
                     </Col>
                 </Form.Group>
 
@@ -77,7 +102,7 @@ const PizzaNew = () => {
                         Preço R$
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="number" onChange={handleChange} name="value" placeholder="30,00" />
+                        <Form.Control type="number" onChange={handleChange} value={pizza.value != undefined ? pizza.value : ''} name="value" placeholder="30,00" />
                     </Col>
                 </Form.Group>
 
@@ -95,4 +120,4 @@ const PizzaNew = () => {
     )
 }
 
-export default PizzaNew
+export default PizzaForm

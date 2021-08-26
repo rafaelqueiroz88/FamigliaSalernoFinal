@@ -5,8 +5,9 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import styled from 'styled-components'
 
 const Img = styled.img`
-    width: 80%;
-    max-height: 250px;
+    width: 220px;
+    min-height: 210px;
+    max-height: 210px;
     box-shadow: 4px 4px 4px rgba(30, 30, 30, 0.6);
     border-radius: 50%;
 `
@@ -32,10 +33,11 @@ const PizzaAttachment = (props) => {
     const form = new FormData()
 
     const uri = props.match.params.slug
+    const url = `/api/v1/pizzas/${uri}`
 
     if(uri != undefined) {
         useEffect(() => {
-            axios.get(`/api/v1/pizzas/${uri}`)
+            axios.get(url)
                 .then(response => {
                     setPizza(response.data.data.attributes)
                 })
@@ -77,44 +79,58 @@ const PizzaAttachment = (props) => {
             })
     }
 
+    if(pizza.photo_data != undefined || pizza.photo_data != null)
+        image_id = JSON.parse(pizza.photo_data)
+
     return(
         <Container>
             <Row className="pt-5 pb-3">
-                <Col>
-                    <h2>Anexe uma Imagem</h2>
+                <Col xs={12} sm={12} md={5}>
+                    <h2>Anexar uma Imagem</h2>
+                </Col>
+            </Row>
+
+            <Row className="mb-3">
+                <Col xs={{ span: 10, offset: 2 }} sm={{ span: 10, offset: 2 }} md={{ span: 3, offset: 0 }}>
+                    { 
+                        image_id != null ? 
+                        <Img src={`/uploads/${ image_id.id }`} alt={`${pizza.name}`} /> : 
+                        ''
+                    }
                 </Col>
             </Row>
 
             <Form onSubmit={handleFormSubmit} encType={"multipart/form-data"}>
 
-                <Row>
-                    <Col xs={10} sm={10} md={3}>
-                        <div className={"form-group"}>
-                            { 
-                                image_id != null ? 
-                                <Img src={`/uploads/${ image_id.id }`} alt={`${pizza.name}`} /> : 
-                                ''
-                            }
-                        </div>
-                    </Col>
-                </Row>
-
-                <Form.Group as={Row} className="mb-3" controlId="pizzaValue">
+                <Form.Group as={Row} className="mb-3" controlId="pizzaImagem">
                     <Form.Label column sm="2">
-                        Preço R$
+                        Anexe uma imagem
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control onChange={fileHandler} type={"file"} accept={"image/*"} name="photo" />
+                        <Form.Control onChange={fileHandler} type={"file"} accept={"image/*"} name="photo" required />
                     </Col>
                 </Form.Group>
-
                 <Form.Group as={Row} className="mb-3 pt-3" controlId="pizzaButton">
-                    <Col xs={{ span: 6, offset: 3 }} sm={{ span: 6, offset: 3 }}>
+                    <Col xs={{ span: 8, offset: 2 }} sm={{ span: 8, offset: 2 }} md={{ span: 3, offset: 2 }}>
                         <div className="d-grid gap-2">
-                            <Button type="submit" size="lg">
-                                Avançar <i className="fas fa-arrow-circle-right"></i>
+                            <Button type="submit" variant="success" size="lg">
+                                <i className="far fa-save"></i> Atualizar
                             </Button>
                         </div>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3 pt-3" controlId="pizzaKeepButton">
+                    <Col xs={{ span: 8, offset: 2 }} sm={{ span: 8, offset: 2 }} md={{ span: 3, offset: 2 }}>
+                        <div className="d-grid gap-2">
+                            <Button size="lg" href="/">
+                                <i className="fas fa-check-circle"></i> Manter Imagem
+                            </Button>
+                        </div>
+                        { 
+                            image_id == null ? 
+                            <small><br />{'Obs. não há nenhuma imagem cadastrado'}</small> :
+                            ''
+                        }
                     </Col>
                 </Form.Group>
             </Form>

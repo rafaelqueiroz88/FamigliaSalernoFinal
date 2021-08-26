@@ -1,4 +1,4 @@
 class PizzaSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name, :value, :slug, :photo_data
+  attributes :name, :description, :value, :slug, :photo_data
 end

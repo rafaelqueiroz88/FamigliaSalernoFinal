@@ -7,8 +7,9 @@ import { Route, Switch } from 'react-router-dom'
 import NavigationBar from './Layout/NavigationBar'
 import Auth from './Auth'
 import Pizzas from './Pizzas'
-import PizzaNew from './Pizzas/PizzaNew'
+import PizzaForm from './Pizzas/PizzaForm'
 import PizzaAttachment from './Pizzas/PizzaAttachment'
+import Pizza from './Pizzas/Pizza'
 
 const App = () => {
 
@@ -19,8 +20,10 @@ const App = () => {
                 <Route exact path="/" component={Pizzas} />
                 <Route exact path="/pizzas" component={Pizzas} />
                 <Route exact path="/entrar" component={Auth} />
-                <Route exact path="/pizzas/nova" component={PizzaNew} />
+                <Route exact path="/pizzas/nova" component={PizzaForm} />
                 <Route exact path="/pizzas/anexo/:slug" component={PizzaAttachment} />
+                <Route exact path="/pizzas/:slug" component={Pizza} />
+                <Route exact path="/pizzas/atualizar/:slug" component={PizzaForm} />
             </Switch>
         </Fragment>
     )

@@ -50,8 +50,9 @@ const Pizzas = () => {
 
             return(
                 <PizzaCard
-                    key={ pizza.id }
-                    attributes={ pizza.attributes }
+                    key={pizza.id}
+                    attributes={pizza.attributes}
+                    user_type={user_type}
                 />
             )
         })
@@ -65,10 +66,8 @@ const Pizzas = () => {
                 </Col>
             </Row>
             { menu }
-            <Row className="pt-3 pl-2">
-                <Col>
-                    { cards == null ? 'Nenhuma Pizza cadastrada até o momento' : cards }
-                </Col>                
+            <Row className="pt-3 pl-4">
+                { cards == null ? 'Nenhuma Pizza cadastrada até o momento' : cards }
             </Row>            
         </Container>
     )
