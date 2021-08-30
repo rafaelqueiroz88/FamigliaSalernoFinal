@@ -3,9 +3,7 @@ import axios from 'axios'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { StyleSheet, css } from 'aphrodite'
-
-import './pizza.css'
+// import { StyleSheet, css } from 'aphrodite'
 
 const Img = styled.img`
     @media screen and (max-width: 360px) {
@@ -13,28 +11,25 @@ const Img = styled.img`
         min-height: 210px;
         max-height: 210px;
         position: relative;
-            top: 125px;
+            top: 40px;
+        z-index: 100;
     }
 
     @media screen and (min-width: 1260px) {
-        width: 65%;
+        width: 90%;
         max-height: 230px;
         min-height: 230px;
         position: relative;
-            top: 115px;
+            top: 100px;
     }
     
     box-shadow: 4px 4px 4px rgba(30, 30, 30, 0.6);
     border-radius: 50%;
 `
 
-const picPosition = StyleSheet.create ({
-    cover: {
-        '@media screen and (max-width: 360px)': {
-            marginTop: '10px'
-        }
-    }  
-})
+// const picPosition = {
+//     marginTop: '10px'  
+// }
 
 const Pizza = (props) => {
 
@@ -93,54 +88,65 @@ const Pizza = (props) => {
 
     return(
         <Container>
-            <Row >
-                <Col xs={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} md={{ span: 4, offset: 1}}>
-                    { image_id != null ? <Img src={`/uploads/${image_id.id}`} alt={pizza.name} /> : '' }
+            <Row>
+                <Col xs={{span: 11, offset: 1}} sm={{span: 11, offset: 1}} md={{span: 3, offset:0}} lg={{span: 3, offset:0}} xl={{span: 3, offset:0}}>
+                    {
+                        image_id != null ? 
+                        <Img src={`/uploads/${image_id.id}`} alt={pizza.name} /> :
+                         '' 
+                    }
                 </Col>
-            </Row>
-            <Row className="pt-5">
-                <Col className="pt-5 pic-spacing" xs={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} md={{ span: 4, offset: 4 }}>
-                    <h3>{ pizza.name }</h3>
-                </Col>
-            </Row>
-            <Row className="pt-5">
-                <Col xs={10} xs={{ span: 10 }} sm={{ span: 10 }} md={{ span: 4, offset: 4 }}>
-                    <p>{ pizza.description }</p>
-                </Col>
-            </Row>
-            <Row className={"pt-3 pb-3"}>
-                <Col xs={{ span: 5 }} sm={{ span: 5 }} md={{ span: 2, offset: 4 }} >
-                    <div className="d-grid gap-2">
-                        <Button href={"/pizzas"} variant={"primary"}>
-                            <i className="fas fa-arrow-left"></i> Retornar
-                        </Button>
-                    </div>
-                </Col>
-            </Row>
-            <Row className="pb-3">
-                <Col xs={{ span: 5 }} sm={{ span: 5 }} md={{ span: 2, offset: 4 }} >
-                    <div className="d-grid gap-2">
-                        {
-                            user_type == 1 ?
-                            <Button variant="warning" href={`/pizzas/atualizar/${ pizza.slug }`}>
-                                <i className="far fa-edit"></i> Atualizar
-                            </Button> :
-                            ''
-                        }
-                    </div>
-                </Col>
-            </Row>
-            <Row className="pb-3">
-                <Col xs={{ span: 5 }} sm={{ span: 5 }} md={{ span: 2, offset: 4 }} >
-                    <div className="d-grid gap-2">
-                        {
-                            user_type == 1 ?
-                            <Button variant="danger" onClick={handleDeleteSubmit}>
-                                <i className="fas fa-trash-alt"></i> Excluir
-                            </Button> :
-                            ''
-                        }
-                    </div>
+                <Col xs={{span: 12, offset: 0}} sm={{span: 12, offset: 0}} md={{span: 9, offset:0}} lg={{span: 9, offset:0}} xl={{span: 9, offset:0}}>
+                    <Row className="pt-3">
+                        <Col className="pt-5" xs={9} sm={9} md={9} lg={9} >
+                            <h3>{ pizza.name }</h3>
+                        </Col>
+                    </Row>
+                    <Row className="pt-2">
+                        <Col xs={{span: 10, offset: 0}} sm={{span: 10, offset: 0}} md={{span: 9, offset:0}} lg={{span: 9, offset:0}} xl={{span: 9, offset:0}} className="bg-success">
+                            <p>{ pizza.description }</p>
+                        </Col>
+                    </Row>
+                    <Row className="pt-2">
+                        <Col xs={{span: 10, offset: 0}} sm={{span: 10, offset: 0}} md={{span: 9, offset:0}} lg={{span: 9, offset:0}} xl={{span: 9, offset:0}}>
+                            <strong>R$ { pizza.value },00 </strong>
+                        </Col>
+                    </Row>
+                    <Row className={"pt-2 pb-3"}>
+                        <Col xs={{span: 5, offset: 0}} sm={{span: 5, offset: 0}} md={{span: 2, offset: 0}} lg={{span: 2, offset: 0}} xl={{span: 2, offset: 0}}>
+                            <div className="d-grid gap-2">
+                                <Button href={"/pizzas"} variant={"primary"}>
+                                    <i className="fas fa-arrow-left"></i> Retornar
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className="pb-3">
+                        <Col xs={{span: 5, offset: 0}} sm={{span: 5, offset: 0}} md={{span: 2, offset: 0}} lg={{span: 2, offset: 0}} xl={{span: 2, offset: 0}}>
+                            <div className="d-grid gap-2">
+                                {
+                                    user_type == 1 ?
+                                    <Button variant="success" href={`/pizzas/atualizar/${ pizza.slug }`}>
+                                        <i className="far fa-edit"></i> Atualizar
+                                    </Button> :
+                                    ''
+                                }
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className="pb-3">
+                        <Col xs={{span: 5, offset: 0}} sm={{span: 5, offset: 0}} md={{span: 2, offset: 0}} lg={{span: 2, offset: 0}} xl={{span: 2, offset: 0}}>
+                            <div className="d-grid gap-2">
+                                {
+                                    user_type == 1 ?
+                                    <Button variant="danger" onClick={handleDeleteSubmit}>
+                                        <i className="fas fa-trash-alt"></i> Excluir
+                                    </Button> :
+                                    ''
+                                }
+                            </div>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </Container>
