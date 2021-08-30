@@ -67,7 +67,7 @@ const Pizza = (props) => {
             .catch(response => {
                 console.log(response)
             })
-    })
+    }, [])
 
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
