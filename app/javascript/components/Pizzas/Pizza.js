@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 // import { StyleSheet, css } from 'aphrodite'
 
+import './pizza.css'
+
 const Img = styled.img`
     @media screen and (max-width: 360px) {
         width: 220px;
@@ -88,7 +90,7 @@ const Pizza = (props) => {
 
     return(
         <Container>
-            <Row>
+            <Row className="cover">
                 <Col xs={{span: 11, offset: 1}} sm={{span: 11, offset: 1}} md={{span: 3, offset:0}} lg={{span: 3, offset:0}} xl={{span: 3, offset:0}}>
                     {
                         image_id != null ? 
@@ -103,7 +105,7 @@ const Pizza = (props) => {
                         </Col>
                     </Row>
                     <Row className="pt-2">
-                        <Col xs={{span: 10, offset: 0}} sm={{span: 10, offset: 0}} md={{span: 9, offset:0}} lg={{span: 9, offset:0}} xl={{span: 9, offset:0}} className="bg-success">
+                        <Col xs={{span: 10, offset: 0}} sm={{span: 10, offset: 0}} md={{span: 9, offset:0}} lg={{span: 9, offset:0}} xl={{span: 9, offset:0}}>
                             <p>{ pizza.description }</p>
                         </Col>
                     </Row>
