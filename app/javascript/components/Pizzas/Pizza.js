@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
         '@media screen and (max-width: 360px)': {
             backgroundImage: 'linear-gradient(rgb(0, 0, 150), rgb(250, 250, 250))'
         },
-        // '@media screen and (max-width: 1260px)': {
-        //     backgroundImage: 'linear-gradient(rgb(70, 70, 70), rgb(250, 250, 250))'
-        // }
+        '@media screen and (min-width: 900px)': {
+            backgroundImage: 'linear-gradient(rgb(70, 70, 70), rgb(250, 250, 250))'
+        }
     }
 
 })
