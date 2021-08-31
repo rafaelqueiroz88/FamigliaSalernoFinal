@@ -3,9 +3,25 @@ import axios from 'axios'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-// import { StyleSheet, css } from 'aphrodite'
+import { StyleSheet, css } from 'aphrodite'
 
-import './pizza.css'
+const styles = StyleSheet.create({
+    small: {
+        '@media screen and (max-width: 360px)': {
+            marginTop: '50px'
+        }
+    },
+    
+    cover: {
+        '@media screen and (max-width: 360px)': {
+            backgroundImage: 'linear-gradient(rgb(0, 0, 150), rgb(250, 250, 250))'
+        },
+        // '@media screen and (max-width: 1260px)': {
+        //     backgroundImage: 'linear-gradient(rgb(70, 70, 70), rgb(250, 250, 250))'
+        // }
+    }
+
+})
 
 const Img = styled.img`
     @media screen and (max-width: 360px) {
@@ -90,7 +106,7 @@ const Pizza = (props) => {
 
     return(
         <Container>
-            <Row className="cover">
+            <Row className={css(styles.cover)}>
                 <Col xs={{span: 11, offset: 1}} sm={{span: 11, offset: 1}} md={{span: 3, offset:0}} lg={{span: 3, offset:0}} xl={{span: 3, offset:0}}>
                     {
                         image_id != null ? 
