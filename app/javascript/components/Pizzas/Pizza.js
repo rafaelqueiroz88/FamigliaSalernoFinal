@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
             marginTop: '50px'
         }
     },
-    
     cover: {
         '@media screen and (max-width: 360px)': {
             backgroundImage: 'linear-gradient(rgb(0, 0, 150), rgb(250, 250, 250))'
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
             backgroundImage: 'linear-gradient(rgb(70, 70, 70), rgb(250, 250, 250))'
         }
     }
-
 })
 
 const Img = styled.img`
