@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import  'bootstrap/dist/css/bootstrap.min.css'
 
+import '../assets/css/pizza.css'
+
 import App from '../components/App'
 
 document.addEventListener('DOMContentLoaded', () => {
