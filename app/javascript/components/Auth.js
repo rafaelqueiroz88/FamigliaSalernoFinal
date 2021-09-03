@@ -65,7 +65,7 @@ const Auth = () => {
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('slug', response.data.slug)
                 localStorage.setItem('email', response.data.email)
-                localStorage.setItem('user_type', response.data.user_type)
+                localStorage.setItem('user_type', 0)
                 history.push('/pizzas')
             }).catch(response => {
                 console.log(response)

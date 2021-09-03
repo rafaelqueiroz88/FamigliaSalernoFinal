@@ -6,20 +6,19 @@ module Api
 
             before_action :authorized
 
-            # @get: /api/v1/users.json
+            # @get: /api/v1/addresses.json
             def index
-                user = User.find_by(slug: params[:slug])
-                addresses = Address.find_by(user_id: user.id)
+                addresses = Address.all
                 render json: AddressSerializer.new(addresses).serialized_json
             end
 
-            # @get: /api/v1/users/:slug
+            # @get: /api/v1/addresses/:slug
             def show
                 address = Address.find_by(slug: params[:slug])
                 render json: AddressSerializer.new(address).serialized_json
             end
 
-            # @post: /api/v1/users.json
+            # @post: /api/v1/addresses
             def create
                 address = Address.new(address_params)
                 user = User.find(params[:user_id])
@@ -37,7 +36,7 @@ module Api
                 end
             end
 
-            # @patch: /api/v1/users/:slug
+            # @patch: /api/v1/addresses/:slug
             def update
                 address = Address.find_by(slug: params[:slug])
                 if address.user_id == params[:user_id]
@@ -51,18 +50,21 @@ module Api
                 end
             end
 
-            # @delete: /api/v1/users/:slug
+            # @delete: /api/v1/addresses/:slug
             def destroy
                 address = Address.find_by(slug: params[:slug])
-                if address.update(address_params)
-                    if address.delete
-                        head :no_content
-                    else
-                        render json: { error: address.error.message }, status: 422
-                    end
+                if address.delete
+                    head :no_content
                 else
-                    render json: { error: "This user doesn't have permission to update this address" }
+                    render json: { error: address.error.message }, status: 422
                 end
+            end
+
+            # @get: /api/v1/addresses_by_user/:slug
+            def get_addresses_by_user
+                user = User.find_by(slug: params[:slug])
+                addresses = Address.where(user_id: user.id)
+                render json: AddressSerializer.new(addresses).serialized_json
             end
 
             private

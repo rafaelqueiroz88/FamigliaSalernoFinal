@@ -3,6 +3,8 @@ import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap'
 
 const NavigationBar = () => {
 
+    const user_slug = localStorage.getItem('slug') != null ? localStorage.getItem('slug') : null
+
     return(
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -11,7 +13,7 @@ const NavigationBar = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/pizzas">Pizzas</Nav.Link>
-                            <Nav.Link href="/enderecos">Endereços</Nav.Link>
+                            <Nav.Link href={`/enderecos/${user_slug}`}>Endereços</Nav.Link>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

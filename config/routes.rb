@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       # custom routes for file uploads
       match "/pizza/attachment/:slug", to: "pizzas#attachment", via: :patch
 
+      get "/addresses_by_user/:slug", to: "addresses#get_addresses_by_user"
+
       # custom routes for auth
       post "/login", to: "users#login"
       get "/auto_login", to: "users#auto_login"
