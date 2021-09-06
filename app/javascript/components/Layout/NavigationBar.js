@@ -33,7 +33,7 @@ const NavigationBar = () => {
                             {
                                 user_slug == null ? 
                                 '' :
-                                <Nav.Link href={`/pedidos/${user_slug}`}>Endereços</Nav.Link>
+                                <Nav.Link href={`/pedidos/${user_slug}`}>Pedidos</Nav.Link>
                             }
                             
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">

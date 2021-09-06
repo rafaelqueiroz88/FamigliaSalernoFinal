@@ -106,7 +106,7 @@ const PizzaForm = (props) => {
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3 pt-3" controlId="pizzaValue">
+                <Form.Group as={Row} className="mb-3 pt-3" controlId="menu">
                     <Col xs={{ span: 6, offset: 3 }} sm={{ span: 6, offset: 3 }}>
                         <div className="d-grid gap-2">
                             <Button type="submit" size="lg">

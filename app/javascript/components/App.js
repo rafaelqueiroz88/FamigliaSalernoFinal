@@ -12,6 +12,8 @@ import PizzaAttachment from './Pizzas/PizzaAttachment'
 import Pizza from './Pizzas/Pizza'
 import Addresses from './Addresses'
 import AddressForm from './Addresses/AddressForm'
+import Orders from './Orders'
+import OrderForm from './Orders/OrderForm'
 
 const App = () => {
 
@@ -28,6 +30,8 @@ const App = () => {
                 <Route exact path="/pizzas/atualizar/:slug" component={PizzaForm} />
                 <Route exact path="/enderecos/novo/" component={AddressForm} />
                 <Route exact path="/enderecos/:slug" component={Addresses} />
+                <Route exact path="/pedidos/novo" component={OrderForm} />
+                <Route exact path="/pedidos/:slug" component={Orders} />
             </Switch>
         </Fragment>
     )
