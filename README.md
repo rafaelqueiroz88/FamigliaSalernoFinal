@@ -1,5 +1,20 @@
 <!-- Readme doc: https://github.com/othneildrew/Best-README-Template#roadmap -->
 
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -79,7 +94,7 @@ Nesta sessão, temos acesso a todas as tecnologias utilizadas no projeto. Saiba 
 
 Para levantar a aplicação basta iniciar o docker-compose
 
-### Prerequisites
+### Requisitos
 
 Algumas bibliotecas estão sendo utilizadas pelo Ruby on Rails. Para fazer a instalação basta seguir com o comando:
 
@@ -88,7 +103,7 @@ Algumas bibliotecas estão sendo utilizadas pelo Ruby on Rails. Para fazer a ins
   bundle install
   ```
 
-### Installation
+### Instalação
 
 1. Clone o repositório
    ```sh
@@ -108,13 +123,13 @@ Basta abrir um navegador de sua preferência, e acessar a seguinte URL: localhos
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 <!-- ROADMAP -->
-## Roadmap
+## Progresso
 
 Veja [open issues](https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/issues) para ver a lista de features sugeridas.
 
 
 <!-- CONTRIBUTING -->
-## Contributing
+## Contribuição
 
 Contribuições fazem com que nossas aplicações sejam sempre melhores. Neste caso não é diferente. Caso queira compartilhar seu conhecimento basta seguir os passos. **Sua ajuda será muito apreciada por nós!**.
 
