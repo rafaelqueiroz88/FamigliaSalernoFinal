@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/pizza.jpg">
+  <a href="https://raw.githubusercontent.com/rafaelqueiroz88/FamigliaSalernoFinal/master/pizza.jpg?token=ADSYDQ7D77BZWQ2R3GW4K73BHJXCO">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
