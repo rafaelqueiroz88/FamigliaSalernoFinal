@@ -10,6 +10,7 @@ const OrderForm = () => {
     const [order, setOrder] = useState([])
     const [pizza, setPizza] = useState([])
     const [pizzas, setPizzas] = useState([])
+    const [primary, setPrimary] = useState(true)
     const [half, setHalf] = useState(false)
     const [addresses, setAddresses] = useState([])
 
@@ -28,6 +29,7 @@ const OrderForm = () => {
         axios.get(`/api/v1/addresses_by_user/${user_slug}`, config)
             .then(response => {
                 setAddresses(response.data.data)
+                setOrder(Object.assign({}, order, { ['user_id']: user_slug }))
             })
             .catch(response => {
                 console.log(response)
@@ -49,7 +51,7 @@ const OrderForm = () => {
         addresses_options = addresses.map( address => {
             return({
                 key: address.id,
-                value: address.id,
+                value: address.attributes.slug,
                 label: `${address.attributes.street}, ${address.attributes.number}`
             })
         })
@@ -57,7 +59,7 @@ const OrderForm = () => {
         pizzas_options = pizzas.map( p => {
             return({
                 key: p.id,
-                value: p.id,
+                value: p.attributes.slug,
                 label: `${p.attributes.name}`
             })
         })
@@ -72,34 +74,39 @@ const OrderForm = () => {
             setHalf(true)
     }
 
-    const handleAddPizzaField = (e) => {
-        e.preventDefault()
-    }
-
     const handleAddressChange = (e) => {
-        console.log(e)
+        setOrder(Object.assign({}, order, { ['address_id']: e.value }))
     }
 
-    /**
-     * monitorar esta função, talvez seja descartável
-     */
-    // const handleChange = (e) => {
-    //     setOrder(Object.assign({}, order, { [e.target.name]: e.target.value }))
-    // }
+    const handlePizza = (content) => e => {
+        
+    }
 
-    const handlePizza = (e) => {
-        setPizza(Object.assign({}, pizza, { [e.target.name]: e.target.value }))
-        console.log(pizza)
+    const handleAddPizza = () => {
+        
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        setOrder(Object.assign(order, { 'pizzas': pizza }))
+
+        const csrfToken = document.querySelector('[name=csrf-token]').content
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
+
+        axios.post(`/api/v1/orders`, order, config)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(response => {
+            console.log(response)
+        })
     }
 
     return(
         <Container>
             <Row className="pt-5 pb-3">
-                <Col>
+                <Col md={{ span: 10, offset: 2 }}>
                     <h2>Novo Pedido</h2>
                 </Col>
             </Row>
@@ -108,38 +115,33 @@ const OrderForm = () => {
 
                 {
                     addresses_options &&
-                        <SelectAddresses
-                            handleAddressChange={handleAddressChange}
-                            addresses={addresses_options}
-                        />
+                    <SelectAddresses
+                        handleAddressChange={handleAddressChange}
+                        addresses={addresses_options}
+                    />
                 }
 
-                <SelectPizzas 
-                    handlePizza={handlePizza} 
-                    half="primary" 
+                <SelectPizzas
+                    half="primary"
+                    handlePizza={handlePizza}
                     pizzas={pizzas_options}
+                    handleNewHalf={handleNewHalf}
                 />
 
                 {
                     half && 
-                    <SelectPizzas handlePizza={handlePizza} half="secondary" pizzas={pizzas_options} />
+                    <SelectPizzas
+                        half="secondary"
+                        handlePizza={handlePizza}
+                        pizzas={pizzas_options}
+                        handleNewHalf={handleNewHalf}
+                    />
                 }
 
-                <Form.Group as={Row} className="mb-3" controlId="orderChangeHalf">
-                    <Col xs={{ span:9, offset: 1 }} sm={{ span:9, offset: 1 }} md={8}>
-                        <Form.Switch
-                            onChange={handleNewHalf}
-                            type="switch"
-                            id="half-types"
-                            label="Add outra metade?"
-                        />
-                    </Col>
-                </Form.Group>
-
                 <Form.Group as={Row} className="mb-1" controlId="orderAddMore">
-                    <Col xs={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} md={9}>
+                    <Col xs={{ span: 10, offset: 1 }} sm={{ span: 10, offset: 1 }} md={{ span: 8, offset: 2 }}>
                         <div className="d-grid gap-2">
-                            <Button onClick={handleAddPizzaField}>
+                            <Button onClick={handleAddPizza}>
                                 <i className="fas fa-plus-circle"></i> Add mais pizza ao Pedido
                             </Button>
                         </div>
@@ -155,7 +157,7 @@ const OrderForm = () => {
                             </Button>
                         </div>
                     </Col>
-                    <Col xs={{ span: 4, offset: 1 }} sm={{ span: 4, offset: 1 }} md={4} >
+                    <Col xs={{ span: 4, offset: 1 }} sm={{ span: 4, offset: 1 }} md={{ span: 4, offset: 0 }} >
                         <div className="d-grid gap-2">
                             <Button type="submit" variant="success" size="lg">
                                 Enviar <i className="fas fa-save"></i>

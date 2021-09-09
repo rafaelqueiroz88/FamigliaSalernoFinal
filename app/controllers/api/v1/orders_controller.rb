@@ -15,8 +15,19 @@ module Api
             # @post: /api/v1/orders.json
             def create
                 order = Order.new(order_params)
+                user = User.find_by(slug: params[:user_id])
+                address = Address.find_by(slug: params[:address_id])
+                order.user = user.id
+                order.address = address.id
+                order.pizza = params[:pizzas]
                 if order.save
-                    render json: OrderSerializer.new(order).serialized_json
+                    render json: {
+                        # TODO: elaborar um ID não oficial reserva e retornar ticket-5231451
+                        # id: order.id, 
+                        user_id: user.slug, 
+                        address_id: address.slug, 
+                        pizzas: order.pizza 
+                    }
                 else
                     render json: { error: order.error.messages }, status: 422
                 end

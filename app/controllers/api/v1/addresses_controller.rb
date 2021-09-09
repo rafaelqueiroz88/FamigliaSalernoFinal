@@ -21,18 +21,23 @@ module Api
             # @post: /api/v1/addresses
             def create
                 address = Address.new(address_params)
-                user = User.find(params[:user_id])
-                token = encode_token({ user_id: user.id })
-                req = request.headers["Authorization"]
-                req_token = req.split('Bearer ')
-                if req_token[1] == token
-                    if address.save
-                        render json: AddressSerializer.new(address).serialized_json
+                user = User.find_by(:id => params[:user_id])
+                puts user.inspect
+                if !user.nil?
+                    token = encode_token({ user_id: user.id })
+                    req = request.headers["Authorization"]
+                    req_token = req.split('Bearer ')
+                    if req_token[1] == token
+                        if address.save
+                            render json: AddressSerializer.new(address).serialized_json
+                        else
+                            render json: { error: address.error.messages }, status: 422
+                        end
                     else
-                        render json: { error: address.error.messages }, status: 422
+                        render json: { error: "This user is not allowed to insert Address to someone else" }
                     end
                 else
-                    render json: { error: "This user is not allowed to insert Address to someone else" }
+                    render json: { error: "User not found" }
                 end
             end
 

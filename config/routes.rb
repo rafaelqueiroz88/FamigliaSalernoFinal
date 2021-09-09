@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users, param: :slug
       resources :addresses, param: :slug
       resources :pizzas, param: :slug
+      resources :orders, param: :slug
 
       # custom routes for file uploads
       match "/pizza/attachment/:slug", to: "pizzas#attachment", via: :patch
