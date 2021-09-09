@@ -3,14 +3,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/pizza.jpg">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Famíglia Salerno</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Que tal conhecer mais este projeto?
     <br />
     <a href="https://github.com/rafaelqueiroz88/FamigliaSalernoFinal"><strong>Explorar »</strong></a>
     <br />
