@@ -18,26 +18,37 @@ module Api
                 render json: AddressSerializer.new(address).serialized_json
             end
 
+            # TODO: Keep this model as it is. Use it as a Sample for all other calls
+            # This method has security access setup
             # @post: /api/v1/addresses
             def create
+                # Store permited address params
                 address = Address.new(address_params)
+                # Find and store received user
                 user = User.find_by(:id => params[:user_id])
-                puts user.inspect
+                # Check if user exists
                 if !user.nil?
+                    # Store token equals to stored in authentication
                     token = encode_token({ user_id: user.id })
+                    # Store received token from Authorization
                     req = request.headers["Authorization"]
                     req_token = req.split('Bearer ')
+                    # Compare if received token (from http) equals to received user token
                     if req_token[1] == token
                         if address.save
+                            # if so, store user and send response
                             render json: AddressSerializer.new(address).serialized_json
                         else
+                            # if something goes wrong emit error message
                             render json: { error: address.error.messages }, status: 422
                         end
                     else
-                        render json: { error: "This user is not allowed to insert Address to someone else" }
+                        # if token is not same. Emit error message
+                        render json: { error: "Can't send adress for someone else" }
                     end
                 else
-                    render json: { error: "User not found" }
+                    # if user is not valid. Emit error message
+                    render json: { error: "User not found!" }
                 end
             end
 

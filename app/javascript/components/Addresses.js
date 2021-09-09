@@ -49,7 +49,6 @@ const Addresses = () => {
             .catch(response => {
                 console.log(response)
             })
-
     }
 
     const handleModalButton = (content) => e => {

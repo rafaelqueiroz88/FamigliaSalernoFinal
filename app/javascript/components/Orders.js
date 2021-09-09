@@ -9,17 +9,48 @@ const Orders = () => {
 
     const [orders, setOrders] = useState([])
 
+    const user_type = localStorage.getItem('user_type') != null ? localStorage.getItem('user_type') : null
     const user_slug = localStorage.getItem('slug') != null ? localStorage.getItem('slug') : null
 
-    useEffect(() => {
-        axios.get(`/api/v1/orders/${user_slug}`)
-            .then(response => {
-                setOrders(response.data.data)
-            })
-            .catch(response => {
-                console.log(response)
-            })
-    }, [])
+    let config = {}
+    if(user_token != null)
+        config = {
+            headers: { Authorization: `Bearer ${user_token}` }
+        }
+
+    if(user_type == 1)
+        useEffect(() => {
+            axios.get(`/api/v1/orders.json`, config)
+                .then(response => {
+                    setOrders(response.data.data)
+                    setLoaded(true)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }, [])
+    else {
+        useEffect(() => {
+            axios.get(`/api/v1/users/${user_slug}`, config)
+                .then(response => {
+                    setUser(response.data.data)
+                    setLoaded(true)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }, [])
+
+        useEffect(() => {
+            axios.get(`/api/v1/orders/${user_slug}`)
+                .then(response => {
+                    setOrders(response.data.data)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }, [])
+    }
 
     let tr = null
     if(orders != undefined && orders.count > 0) {
