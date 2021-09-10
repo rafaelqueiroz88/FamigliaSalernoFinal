@@ -188,7 +188,7 @@ Projeto: [Famiglia Salerno](https://github.com/rafaelqueiroz88/FamigliaSalernoFi
 [issues-shield]: https://img.shields.io/github/issues/rafaelqueiroz88/FamigliaSalernoFinal.svg?style=for-the-badge
 [issues-url]: https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/issues
 [license-shield]: https://img.shields.io/github/license/rafaelqueiroz88/FamigliaSalernoFinal.svg?style=for-the-badge
-[license-url]: https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/LICENSE
+[license-url]: https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/rafael-queiroz-0074a4139/
 <!-- [product-screenshot]: images/screenshot.png -->
