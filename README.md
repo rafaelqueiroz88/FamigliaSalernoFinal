@@ -1,3 +1,5 @@
+<!-- TODO: Melhorar este Readme.md. Incluir todos os passos na sessão de usabilidade -->
+<!-- TODO: Incluir um logotipo assim que obtiver um -->
 <!-- Readme doc: https://github.com/othneildrew/Best-README-Template#roadmap -->
 
 <!-- PROJECT SHIELDS -->
@@ -144,16 +146,13 @@ Contribuições fazem com que nossas aplicações sejam sempre melhores. Neste c
 <!-- LICENSE -->
 ## Licença
 
-Distribuído sobre a licença MIT License. Veja `LICENSE` para mais informações.
-
-
+Distribuído sobre a licença GNU License. Veja mais em nossa base de conhecimentos.
 
 <!-- CONTACT -->
 ## Contato
 
-Rafael Queiroz - [@your_facebook](https://www.facebook.com/rafael.queiroz.castro/) - rafael.qdc88@gmail.com
-
-Projeto: [https://github.com/your_username/repo_name](https://github.com/rafaelqueiroz88/FamigliaSalernoFinal)
+Rafael Queiroz: [@facebook](https://www.facebook.com/rafael.queiroz.castro/) - rafael.qdc88@gmail.com
+Projeto: [Famiglia Salerno](https://github.com/rafaelqueiroz88/FamigliaSalernoFinal)
 
 
 
@@ -189,7 +188,7 @@ Projeto: [https://github.com/your_username/repo_name](https://github.com/rafaelq
 [issues-shield]: https://img.shields.io/github/issues/rafaelqueiroz88/FamigliaSalernoFinal.svg?style=for-the-badge
 [issues-url]: https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/issues
 [license-shield]: https://img.shields.io/github/license/rafaelqueiroz88/FamigliaSalernoFinal.svg?style=for-the-badge
-[license-url]: https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/blob/master/LICENSE.txt
+[license-url]: https://github.com/rafaelqueiroz88/FamigliaSalernoFinal/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/rafael-queiroz-0074a4139/
 <!-- [product-screenshot]: images/screenshot.png -->
